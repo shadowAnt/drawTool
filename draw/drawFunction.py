@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
+from matplotlib import cm
 
 
 def draw1():
@@ -21,9 +22,10 @@ def draw1():
     plt.legend()
     plt.show()
 
+
 def draw2():
     '''
-    z=x**2+y**2
+    z=x**2+y**2    三维的网格图
     :return:
     '''
     # 在-1到1中间取31个值
@@ -39,5 +41,26 @@ def draw2():
     plt.show()
 
 
+def draw3():
+    '''
+    z=x**2-y**2   三维的面图
+    :return:
+    '''
+    # 在-1到1中间取31个值
+    x, y = np.mgrid[-1: 1: 31j, -1: 1: 31j]
+    z = x ** 2 - y ** 2
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    # ax.plot_surface(x, y, z, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+    ax.plot_surface(x, y, z, rstride=1, cstride=1, linewidth=0, cmap=plt.cm.coolwarm)
+    ax.plot([0], [0], [0], 'rx')
+    ax.set_xlabel('X axis')
+    ax.set_ylabel('Y axis')
+    ax.set_zlabel('Z axis')
+    plt.show()
+
+    return x, y, z
+
+
 if __name__ == '__main__':
-    draw2()
+    draw3()
